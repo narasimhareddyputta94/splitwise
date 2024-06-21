@@ -2,6 +2,7 @@ package com.example.splitwise.controller;
 
 import com.example.splitwise.model.Balance;
 import com.example.splitwise.service.BalanceService;
+import com.example.splitwise.service.BalanceService.Settlement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,10 @@ public class BalanceController {
     @DeleteMapping("/{balanceId}")
     public void deleteBalance(@PathVariable Long balanceId) {
         balanceService.deleteBalance(balanceId);
+    }
+
+    @GetMapping("/settle/{groupId}")
+    public List<Settlement> settleBalances(@PathVariable Long groupId) {
+        return balanceService.settleBalances(groupId);
     }
 }
