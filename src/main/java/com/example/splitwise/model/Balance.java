@@ -2,7 +2,6 @@ package com.example.splitwise.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 
 @Entity
@@ -17,4 +16,6 @@ public class Balance {
     private User user;
 
     private Double amount;
+
+
 }

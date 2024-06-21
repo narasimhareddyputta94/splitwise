@@ -2,7 +2,6 @@ package com.example.splitwise.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 
 @Entity
@@ -21,4 +20,5 @@ public class Expense {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
+
 }

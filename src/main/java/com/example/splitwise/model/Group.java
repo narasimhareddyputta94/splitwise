@@ -2,10 +2,13 @@ package com.example.splitwise.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Data
 public class Group {
@@ -24,4 +27,5 @@ public class Group {
 
     @OneToMany(mappedBy = "group")
     private List<Expense> expenses;
-}
+    }
+
