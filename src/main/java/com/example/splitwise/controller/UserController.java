@@ -3,6 +3,7 @@ package com.example.splitwise.controller;
 import com.example.splitwise.model.User;
 import com.example.splitwise.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,10 +24,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody User loginRequest) {
+        User foundUser = userService.findByEmail(loginRequest.getEmail());
+        if (foundUser != null && loginRequest.getPassword().equals(foundUser.getPassword())) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(401).body("Unauthorized");
+        }
     }
-
-    // Additional endpoint methods for user operations
 }

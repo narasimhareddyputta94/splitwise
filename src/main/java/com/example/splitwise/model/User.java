@@ -2,7 +2,6 @@ package com.example.splitwise.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class User {
     private String name;
     private String email;
 
-    private String passwordHash;
+    private String password;
 
     @ManyToMany
     @JoinTable(
@@ -29,13 +28,12 @@ public class User {
     @OneToMany(mappedBy = "paidBy")
     private List<Expense> expenses;
 
-    // Additional fields and methods
-
-    public String getPassword() {
-        return this.passwordHash;
+    // No more encoding in the setPassword method
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setPassword(String password) {
-        this.passwordHash = new BCryptPasswordEncoder().encode(password);
+    public String getPassword() {
+        return password;
     }
 }
