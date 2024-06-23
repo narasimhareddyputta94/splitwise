@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -26,8 +27,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody User loginRequest) {
-        User foundUser = userService.findByEmail(loginRequest.getEmail());
-        if (foundUser != null && loginRequest.getPassword().equals(foundUser.getPassword())) {
+        boolean isAuthenticated = userService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (isAuthenticated) {
             return ResponseEntity.ok("Login successful");
         } else {
             return ResponseEntity.status(401).body("Unauthorized");
